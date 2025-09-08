@@ -57,7 +57,7 @@ const OrdersPage = () => {
               </div>
               <div className='order-actions-admin'>
                 <Link
-                  href={`/admin/orders/${order._id}`}
+                  href={`/admin/orders/${order._id}/details`}
                   className='action-button edit'
                 >
                   View Details

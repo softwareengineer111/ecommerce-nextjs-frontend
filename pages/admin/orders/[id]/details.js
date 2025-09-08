@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { apiFetch } from '../../../utils/api';
-import AdminGuard from '../../../components/AdminGuard';
+import { apiFetch } from '../../../../utils/api';
+import AdminGuard from '../../../../components/AdminGuard';
 
 const OrderDetailPage = () => {
   const router = useRouter();
