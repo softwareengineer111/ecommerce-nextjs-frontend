@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { apiFetch } from '../utils/api';
+import { apiFetch } from '../../../utils/api';
 
 function ProductDetail() {
   const router = useRouter();

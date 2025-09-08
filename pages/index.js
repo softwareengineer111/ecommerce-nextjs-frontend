@@ -37,7 +37,10 @@ export default function Home() {
           <ul className='product-grid'>
             {products.map((p) => (
               <li key={p._id} className='product-card'>
-                <Link href={`${p._id}`} className='product-card-link'>
+                <Link
+                  href={`products/${p._id}/detail`}
+                  className='product-card-link'
+                >
                   {p.images && p.images.length > 0 && (
                     <img
                       src={p.images[0].url}
@@ -52,7 +55,7 @@ export default function Home() {
                 {user && ['superadmin', 'shop manager'].includes(user.role) && (
                   <div className='admin-actions'>
                     <Link
-                      href={`/products/edit/${p._id}`}
+                      href={`/products/${p._id}/edit`}
                       className='action-button edit'
                     >
                       Edit
