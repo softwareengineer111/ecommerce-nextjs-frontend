@@ -41,12 +41,10 @@ const Navbar = () => {
                   <Link href='/admin/categories' className='nav-link'>
                     Manage Categories
                   </Link>
+                  <Link href='/admin/products' className='nav-link'>
+                    Manage Products
+                  </Link>
                 </>
-              )}
-              {canAddProducts && (
-                <Link href='/admin/add-product' className='nav-link'>
-                  Add Product
-                </Link>
               )}
               <button onClick={handleLogout} className='nav-button'>
                 Logout
