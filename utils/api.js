@@ -1,4 +1,5 @@
-export const API_URL = 'https://ecommerce-backend-hazel-alpha.vercel.app/api';
+// export const API_URL = 'https://ecommerce-backend-hazel-alpha.vercel.app/api';
+export const API_URL = 'http://localhost:5000/api';
 
 export const getToken = () => {
   if (typeof window !== 'undefined') {
