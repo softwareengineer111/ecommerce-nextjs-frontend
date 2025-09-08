@@ -63,6 +63,9 @@ const Navbar = () => {
                   </Link>
                 </>
               )}
+              <Link href='/cart' className='nav-link'>
+                Cart
+              </Link>
               <button onClick={handleLogout} className='nav-button'>
                 Logout
               </button>
