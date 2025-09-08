@@ -24,7 +24,8 @@ const GuestGuard = ({ children }) => {
   }, [router]);
 
   if (!isGuest) {
-    return <div>Уншиж байна...</div>; // Or a custom spinner component
+    // Use the consistent loading spinner while checking auth status
+    return <div className='loading-spinner'></div>;
   }
 
   return <>{children}</>;

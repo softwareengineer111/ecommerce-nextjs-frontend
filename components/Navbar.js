@@ -21,6 +21,7 @@ const Navbar = () => {
 
   // Determine if the user has a role that can add products
   const canAddProducts = user && ['super admin', 'manager'].includes(user.role);
+  const isSuperAdmin = user && user.role === 'super admin';
 
   return (
     <nav className='navbar'>
@@ -31,6 +32,11 @@ const Navbar = () => {
         <div className='nav-links'>
           {user ? (
             <>
+              {isSuperAdmin && (
+                <Link href='/admin/dashboard' className='nav-link'>
+                  Dashboard
+                </Link>
+              )}
               {canAddProducts && (
                 <Link href='/add-product' className='nav-link'>
                   Add Product

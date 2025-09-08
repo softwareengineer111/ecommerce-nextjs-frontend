@@ -13,20 +13,30 @@ function Login() {
     e.preventDefault();
     setError('');
     setIsLoading(true);
-    const res = await fetch(`${API_URL}/auth/login`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(form),
-    });
-    const data = await res.json();
-    setIsLoading(false);
 
-    if (data.token) {
+    try {
+      const res = await fetch(`${API_URL}/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+
+      const data = await res.json();
+
+      if (!data.token) {
+        throw new Error(
+          data.message || 'Login failed. Please check your credentials.'
+        );
+      }
+
+      // Токеныг хадгалах
       localStorage.setItem('token', data.token);
-      // Use window.location to trigger a full refresh and update Navbar state
+      // Нүүр хуудас руу шилжих (бүх компонентыг шинэчлэхийн тулд хуудсыг дахин ачаална)
       window.location.href = '/';
-    } else {
-      setError(data.message || 'Login failed. Please check your credentials.');
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -38,9 +48,11 @@ function Login() {
           <label htmlFor='email'>Email</label>
           <input
             id='email'
+            type='email'
             className='form-input'
             placeholder='Email'
             onChange={(e) => setForm({ ...form, email: e.target.value })}
+            required
           />
         </div>
         <div className='form-group'>
@@ -51,6 +63,7 @@ function Login() {
             className='form-input'
             placeholder='Password'
             onChange={(e) => setForm({ ...form, password: e.target.value })}
+            required
           />
         </div>
         {error && <p style={{ color: 'red' }}>{error}</p>}
