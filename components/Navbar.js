@@ -1,22 +1,26 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { getToken } from '../utils/api';
+import { getUserFromToken } from '../utils/api';
 
 const Navbar = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState(null);
   const router = useRouter();
 
   useEffect(() => {
-    const token = getToken();
-    setIsLoggedIn(!!token);
-  }, [router.asPath]); // Re-check login status on route change
+    // On route change, get user data from token
+    const userData = getUserFromToken();
+    setUser(userData);
+  }, [router.asPath]); // Re-check on every navigation
 
   const handleLogout = () => {
     localStorage.removeItem('token');
     // Use window.location to force a full page reload, clearing all state
     window.location.href = '/login';
   };
+
+  // Determine if the user has a role that can add products
+  const canAddProducts = user && ['super admin', 'manager'].includes(user.role);
 
   return (
     <nav className='navbar'>
@@ -25,11 +29,13 @@ const Navbar = () => {
           eCommerce
         </Link>
         <div className='nav-links'>
-          {isLoggedIn ? (
+          {user ? (
             <>
-              <Link href='/add-product' className='nav-link'>
-                Add Product
-              </Link>
+              {canAddProducts && (
+                <Link href='/add-product' className='nav-link'>
+                  Add Product
+                </Link>
+              )}
               <button onClick={handleLogout} className='nav-button'>
                 Logout
               </button>

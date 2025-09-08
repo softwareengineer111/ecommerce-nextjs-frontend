@@ -7,6 +7,22 @@ export const getToken = () => {
   return null;
 };
 
+export const getUserFromToken = () => {
+  const token = getToken();
+  if (!token) {
+    return null;
+  }
+  try {
+    // Decode the token payload. The payload is the middle part of the token.
+    // It's Base64-encoded JSON.
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    return payload; // This should contain user info like id and role
+  } catch (e) {
+    console.error('Invalid token:', e);
+    return null;
+  }
+};
+
 export const apiFetch = async (endpoint, options = {}) => {
   const token = getToken();
   const headers = {
