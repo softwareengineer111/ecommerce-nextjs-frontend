@@ -81,9 +81,9 @@ function CartPage() {
             <p>Total:</p>
             <p>${calculateTotal().toFixed(2)}</p>
           </div>
-          <button className='form-button checkout-button'>
+          <Link href='/checkout' className='form-button checkout-button'>
             Proceed to Checkout
-          </button>
+          </Link>
         </div>
       </div>
     </div>
