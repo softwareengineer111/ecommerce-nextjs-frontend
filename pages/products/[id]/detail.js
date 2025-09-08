@@ -9,6 +9,7 @@ function ProductDetail() {
   const [product, setProduct] = useState(null);
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [quantity, setQuantity] = useState(1);
   const [isAddingToCart, setIsAddingToCart] = useState(false);
   const [error, setError] = useState('');
 
@@ -46,9 +47,9 @@ function ProductDetail() {
       // Assuming the backend endpoint is `/cart` and it handles adding items
       await apiFetch('/cart', {
         method: 'POST',
-        body: JSON.stringify({ productId: product._id, quantity: 1 }),
+        body: JSON.stringify({ productId: product._id, quantity }),
       });
-      alert(`${product.name} has been added to your cart.`);
+      alert(`${quantity} x ${product.name} has been added to your cart.`);
     } catch (err) {
       setError(err.message);
       alert(`Failed to add to cart: ${err.message}`);
@@ -87,6 +88,19 @@ function ProductDetail() {
           <p className='product-price'>${product.price}</p>
           <p>{product.description || 'No description available.'}</p>
           <p>Stock: {product.stock}</p>
+          <div className='quantity-selector'>
+            <label htmlFor='quantity'>Quantity:</label>
+            <input
+              id='quantity'
+              type='number'
+              className='form-input'
+              value={quantity}
+              onChange={(e) => setQuantity(Number(e.target.value))}
+              min='1'
+              max={product.stock}
+              disabled={product.stock === 0}
+            />
+          </div>
           <button
             onClick={handleAddToCart}
             className='form-button'
