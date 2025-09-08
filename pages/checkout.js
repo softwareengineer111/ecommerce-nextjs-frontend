@@ -46,7 +46,7 @@ function CheckoutPage() {
     setError('');
 
     try {
-      const newOrder = await apiFetch('/orders/from-cart', {
+      const newOrder = await apiFetch('/checkout', {
         method: 'POST',
         body: JSON.stringify({ address }),
       });
