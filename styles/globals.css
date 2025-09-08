@@ -363,3 +363,21 @@ a:hover {
 
 .action-button.delete { background-color: #d9534f; }
 .action-button.delete:hover { background-color: #c9302c; }
+
+/* Page Header for Admin Pages */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.page-header h1 {
+  margin: 0;
+}
+
+.page-header .form-button {
+  width: auto;
+}

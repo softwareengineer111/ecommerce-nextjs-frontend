@@ -38,8 +38,11 @@ const Navbar = () => {
                   <Link href='/admin/dashboard' className='nav-link'>
                     Dashboard
                   </Link>
+                  <Link href='/admin/add-category' className='nav-link'>
+                    Add Category
+                  </Link>
                   <Link href='/admin/categories' className='nav-link'>
-                    Categories
+                    Manage Categories
                   </Link>
                 </>
               )}

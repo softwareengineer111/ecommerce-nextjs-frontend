@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { apiFetch } from '../../utils/api';
 import AdminGuard from '../../components/AdminGuard';
 
@@ -6,10 +7,6 @@ const CategoriesPage = () => {
   const [categories, setCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-
-  // State for the "Add Category" form
-  const [newCategoryName, setNewCategoryName] = useState('');
-  const [newCategoryDesc, setNewCategoryDesc] = useState('');
 
   // State for inline editing
   const [editingCategoryId, setEditingCategoryId] = useState(null);
@@ -31,24 +28,6 @@ const CategoriesPage = () => {
   useEffect(() => {
     fetchCategories();
   }, []);
-
-  const handleAddCategory = async (e) => {
-    e.preventDefault();
-    try {
-      await apiFetch('/categories', {
-        method: 'POST',
-        body: JSON.stringify({
-          name: newCategoryName,
-          description: newCategoryDesc,
-        }),
-      });
-      setNewCategoryName('');
-      setNewCategoryDesc('');
-      fetchCategories(); // Refresh the list
-    } catch (err) {
-      alert(`Error adding category: ${err.message}`);
-    }
-  };
 
   const handleDeleteCategory = async (categoryId) => {
     if (window.confirm('Are you sure you want to delete this category?')) {
@@ -90,41 +69,14 @@ const CategoriesPage = () => {
 
   return (
     <div>
-      <h1>Manage Categories</h1>
-
-      {/* Add Category Form */}
-      <div className='form-container'>
-        <h2>Add New Category</h2>
-        <form onSubmit={handleAddCategory}>
-          <div className='form-group'>
-            <label htmlFor='new-category-name'>Name</label>
-            <input
-              id='new-category-name'
-              type='text'
-              value={newCategoryName}
-              onChange={(e) => setNewCategoryName(e.target.value)}
-              className='form-input'
-              required
-            />
-          </div>
-          <div className='form-group'>
-            <label htmlFor='new-category-desc'>Description (Optional)</label>
-            <textarea
-              id='new-category-desc'
-              value={newCategoryDesc}
-              onChange={(e) => setNewCategoryDesc(e.target.value)}
-              rows='2'
-              className='form-input'
-            ></textarea>
-          </div>
-          <button type='submit' className='form-button'>
-            Add Category
-          </button>
-        </form>
+      <div className='page-header'>
+        <h1>Manage Categories</h1>
+        <Link href='/admin/add-category' className='form-button'>
+          + Add New
+        </Link>
       </div>
 
       {/* Categories List */}
-      <h2>Existing Categories</h2>
       {isLoading && <div className='loading-spinner'></div>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
       {!isLoading && !error && (
