@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { API_URL } from '../utils/api';
+import { apiFetch } from '../utils/api';
 import GuestGuard from '../components/GuestGuard';
 
 function Register() {
@@ -14,19 +14,11 @@ function Register() {
     setError('');
     setIsLoading(true);
     try {
-      const res = await fetch(`${API_URL}/auth/register`, {
+      // Use the centralized apiFetch utility for consistent error handling
+      await apiFetch('/auth/register', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
       });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(
-          data.message || 'Registration failed. Please try again.'
-        );
-      }
 
       alert('Registration successful! Please log in.');
       router.push('/login');

@@ -17,10 +17,10 @@ function AdminDashboard() {
           <h3>Бүтээгдэхүүн Нэмэх</h3>
           <p>Шинэ бараа бүтээгдэхүүнийг системд бүртгэх.</p>
         </Link>
-        <div className='dashboard-card disabled'>
-          <h3>Хэрэглэгч Удирдах</h3>
-          <p>Бүх хэрэглэгчийн мэдээллийг харах, удирдах (Тун удахгүй).</p>
-        </div>
+        <Link href='/admin/products' className='dashboard-card'>
+          <h3>Бүтээгдэхүүн Удирдах</h3>
+          <p>Бүтээгдэхүүний жагсаалтыг харах, засах, устгах.</p>
+        </Link>
         <div className='dashboard-card disabled'>
           <h3>Захиалга Харах</h3>
           <p>Сайтын захиалгуудыг хянах (Тун удахгүй).</p>

@@ -10,6 +10,7 @@ function AddProduct() {
     price: '',
     stock: '',
   });
+  const [files, setFiles] = useState([]);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
@@ -18,17 +19,34 @@ function AddProduct() {
     e.preventDefault();
     setError('');
     setIsLoading(true);
-    const res = await apiFetch('/products', {
-      method: 'POST',
-      body: JSON.stringify(form),
-    });
-    setIsLoading(false);
 
-    if (res._id) {
-      alert('Product added successfully!');
-      router.push('/');
-    } else {
-      setError(res.message || 'Failed to add product.');
+    try {
+      const formData = new FormData();
+      // Append form fields
+      Object.keys(form).forEach((key) => {
+        formData.append(key, form[key]);
+      });
+
+      // Append files (your backend expects the field name 'images')
+      for (let i = 0; i < files.length; i++) {
+        formData.append('images', files[i]);
+      }
+
+      const res = await apiFetch('/products', {
+        method: 'POST',
+        body: formData, // Pass FormData directly
+      });
+
+      if (res._id) {
+        alert('Product added successfully!');
+        router.push('/');
+      } else {
+        throw new Error(res.message || 'Failed to add product.');
+      }
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -43,6 +61,7 @@ function AddProduct() {
             className='form-input'
             placeholder='Name'
             onChange={(e) => setForm({ ...form, name: e.target.value })}
+            required
           />
         </div>
         <div className='form-group'>
@@ -62,6 +81,7 @@ function AddProduct() {
             className='form-input'
             placeholder='Price'
             onChange={(e) => setForm({ ...form, price: e.target.value })}
+            required
           />
         </div>
         <div className='form-group'>
@@ -72,6 +92,18 @@ function AddProduct() {
             className='form-input'
             placeholder='Stock'
             onChange={(e) => setForm({ ...form, stock: e.target.value })}
+            required
+          />
+        </div>
+        <div className='form-group'>
+          <label htmlFor='images'>Product Images (up to 5)</label>
+          <input
+            id='images'
+            type='file'
+            className='form-input'
+            multiple
+            accept='image/*'
+            onChange={(e) => setFiles(e.target.files)}
           />
         </div>
         {error && <p style={{ color: 'red' }}>{error}</p>}

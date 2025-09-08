@@ -205,6 +205,72 @@ a:hover {
   color: #0070f3;
 }
 
+/* Product Card Link Reset */
+.product-card-link {
+  color: inherit;
+  text-decoration: none;
+  display: block; /* Makes the whole area clickable */
+}
+
+.product-card-link:hover {
+  text-decoration: none;
+}
+
+/* Product Detail Page */
+.product-detail-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 2rem;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+}
+
+.product-detail-images .main-image-container {
+  border: 1px solid #eee;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.product-detail-images .main-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.thumbnail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 10px;
+}
+
+.thumbnail-image {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.thumbnail-image:hover {
+  border-color: #ccc;
+}
+
+.thumbnail-image.active {
+  border-color: #0070f3;
+}
+
+.product-detail-info h1 {
+  margin-top: 0;
+}
+
 /* Utility */
 .text-center {
   text-align: center;
@@ -223,4 +289,11 @@ a:hover {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+/* Responsive for detail page */
+@media (max-width: 768px) {
+  .product-detail-container {
+    grid-template-columns: 1fr;
+  }
 }

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { API_URL, getUserFromToken } from '../utils/api';
+import { apiFetch, getUserFromToken } from '../utils/api';
 import GuestGuard from '../components/GuestGuard';
 
 function Login() {
@@ -14,17 +14,14 @@ function Login() {
     setError('');
     setIsLoading(true);
     try {
-      const res = await fetch(`${API_URL}/auth/login`, {
+      // Use the centralized apiFetch utility for consistent error handling
+      const data = await apiFetch('/auth/login', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
       });
-      const data = await res.json();
 
       if (!data.token) {
-        throw new Error(
-          data.message || 'Login failed. Please check your credentials.'
-        );
+        throw new Error('Login failed: No token received.');
       }
 
       // Save the token
