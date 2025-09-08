@@ -13,14 +13,12 @@ function Login() {
     e.preventDefault();
     setError('');
     setIsLoading(true);
-
     try {
       const res = await fetch(`${API_URL}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
       });
-
       const data = await res.json();
 
       if (!data.token) {

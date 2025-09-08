@@ -13,19 +13,27 @@ function Register() {
     e.preventDefault();
     setError('');
     setIsLoading(true);
-    const res = await fetch(`${API_URL}/auth/register`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(form),
-    });
-    const data = await res.json();
-    setIsLoading(false);
+    try {
+      const res = await fetch(`${API_URL}/auth/register`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
 
-    if (res.ok) {
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(
+          data.message || 'Registration failed. Please try again.'
+        );
+      }
+
       alert('Registration successful! Please log in.');
       router.push('/login');
-    } else {
-      setError(data.message || 'Registration failed. Please try again.');
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -38,17 +46,20 @@ function Register() {
           <input
             id='name'
             className='form-input'
-            placeholder='Name'
+            placeholder='Your Name'
             onChange={(e) => setForm({ ...form, name: e.target.value })}
+            required
           />
         </div>
         <div className='form-group'>
           <label htmlFor='email'>Email</label>
           <input
             id='email'
+            type='email'
             className='form-input'
-            placeholder='Email'
+            placeholder='your.email@example.com'
             onChange={(e) => setForm({ ...form, email: e.target.value })}
+            required
           />
         </div>
         <div className='form-group'>
@@ -57,8 +68,9 @@ function Register() {
             id='password'
             type='password'
             className='form-input'
-            placeholder='Password'
+            placeholder='Create a password'
             onChange={(e) => setForm({ ...form, password: e.target.value })}
+            required
           />
         </div>
         {error && <p style={{ color: 'red' }}>{error}</p>}
