@@ -39,7 +39,7 @@ const Navbar = () => {
                     Dashboard
                   </Link>
                   <Link href='/admin/categories' className='nav-link'>
-                    Categories Manage Categories
+                    Manage Categories
                   </Link>
                 </>
               )}
