@@ -36,7 +36,7 @@ function ProductDetail() {
   }
 
   if (error) {
-    return <p style={{ color: 'red' }}>Error: {error}</p>;
+    return <p style={{ color: 'red' }}>Алдаа: {error}</p>;
   }
 
   if (!product) {
@@ -59,9 +59,9 @@ function ProductDetail() {
         </div>
         <div className='product-info'>
           <p className='product-price'>${product.price}</p>
-          <p>{product.description || 'No description available.'}</p>
-          <p>Stock: {product.stock}</p>
-          <button className='form-button'>Add to Cart</button>
+          <p>{product.description || 'Тайлбар байхгүй.'}</p>
+          <p>Үлдэгдэл: {product.stock}</p>
+          <button className='form-button'>Сагсанд нэмэх</button>
         </div>
       </div>
     </div>
