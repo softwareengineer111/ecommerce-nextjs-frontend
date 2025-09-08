@@ -34,12 +34,12 @@ const Navbar = () => {
           {user ? (
             <>
               {isSuperAdmin && (
-                <Link href='/dashboard' className='nav-link'>
+                <Link href='/admin/dashboard' className='nav-link'>
                   Dashboard
                 </Link>
               )}
               {canAddProducts && (
-                <Link href='/add-product' className='nav-link'>
+                <Link href='/admin/add-product' className='nav-link'>
                   Add Product
                 </Link>
               )}

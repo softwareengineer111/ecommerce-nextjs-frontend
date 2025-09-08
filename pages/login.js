@@ -35,7 +35,7 @@ function Login() {
 
       if (user && user.role === 'superadmin') {
         // If superadmin, redirect to dashboard
-        window.location.href = '/dashboard';
+        window.location.href = '/admin/dashboard';
       } else {
         // For other roles, or if user data is not available, redirect to home
         window.location.href = '/';

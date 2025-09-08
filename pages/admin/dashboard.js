@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import AuthGuard from '../utils/AuthGuard';
-import { getUserFromToken } from '../utils/api';
+import AuthGuard from '../../utils/AuthGuard';
+import { getUserFromToken } from '../../utils/api';
 
 function AdminDashboard() {
   const user = getUserFromToken();
@@ -13,7 +13,7 @@ function AdminDashboard() {
       </p>
 
       <div className='dashboard-grid'>
-        <Link href='/add-product' className='dashboard-card'>
+        <Link href='/admin/add-product' className='dashboard-card'>
           <h3>Бүтээгдэхүүн Нэмэх</h3>
           <p>Шинэ бараа бүтээгдэхүүнийг системд бүртгэх.</p>
         </Link>

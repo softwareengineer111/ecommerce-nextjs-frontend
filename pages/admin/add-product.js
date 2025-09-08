@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { apiFetch } from '../utils/api';
-import AuthGuard from '../utils/AuthGuard';
+import { apiFetch } from '../../utils/api';
+import AuthGuard from '../../utils/AuthGuard';
 
 function AddProduct() {
   const [form, setForm] = useState({
