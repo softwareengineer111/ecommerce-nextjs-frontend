@@ -34,9 +34,14 @@ const Navbar = () => {
           {user ? (
             <>
               {isSuperAdmin && (
-                <Link href='/admin/dashboard' className='nav-link'>
-                  Dashboard
-                </Link>
+                <>
+                  <Link href='/admin/dashboard' className='nav-link'>
+                    Dashboard
+                  </Link>
+                  <Link href='/admin/categories' className='nav-link'>
+                    Categories
+                  </Link>
+                </>
               )}
               {canAddProducts && (
                 <Link href='/admin/add-product' className='nav-link'>

@@ -297,3 +297,69 @@ a:hover {
     grid-template-columns: 1fr;
   }
 }
+
+/* Category Management Page */
+.category-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 2rem;
+}
+
+.category-item {
+  background: #fff;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.category-info h3 {
+  margin: 0 0 0.25rem 0;
+  font-size: 1.2rem;
+}
+
+.category-info p {
+  margin: 0;
+  color: #666;
+}
+
+.category-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.edit-form {
+  width: 100%;
+}
+
+/* Reusable Admin Action Buttons */
+.admin-actions {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.action-button {
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: white;
+  transition: background-color 0.2s;
+}
+
+.action-button.edit { background-color: #f0ad4e; }
+.action-button.edit:hover { background-color: #ec971f; }
+
+.action-button.delete { background-color: #d9534f; }
+.action-button.delete:hover { background-color: #c9302c; }
