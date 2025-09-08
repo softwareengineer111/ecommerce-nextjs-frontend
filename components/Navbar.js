@@ -23,6 +23,7 @@ const Navbar = () => {
   const canAddProducts =
     user && ['superadmin', 'shop manager'].includes(user.role);
   const isSuperAdmin = user && user.role === 'superadmin';
+  const isShopManager = user && user.role === 'shopmanager';
 
   return (
     <nav className='navbar'>
@@ -49,6 +50,16 @@ const Navbar = () => {
                   </Link>
                   <Link href='/admin/orders' className='nav-link'>
                     Manage Orders
+                  </Link>
+                </>
+              )}
+              {isShopManager && (
+                <>
+                  <Link href='/shop/manage' className='nav-link'>
+                    Manage My Shop
+                  </Link>
+                  <Link href='/admin/add-product' className='nav-link'>
+                    Add Product
                   </Link>
                 </>
               )}

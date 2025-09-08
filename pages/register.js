@@ -128,17 +128,6 @@ function Register() {
             </div>
           </>
         )}
-        <div className='form-group'>
-          <label htmlFor='password'>Password</label>
-          <input
-            id='password'
-            type='password'
-            className='form-input'
-            placeholder='Create a password'
-            onChange={(e) => setForm({ ...form, password: e.target.value })}
-            required
-          />
-        </div>
         {error && <p style={{ color: 'red' }}>{error}</p>}
         <button type='submit' className='form-button' disabled={isLoading}>
           {isLoading ? 'Registering...' : 'Register'}

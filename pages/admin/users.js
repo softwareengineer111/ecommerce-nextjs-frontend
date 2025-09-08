@@ -57,6 +57,14 @@ const UsersPage = () => {
                 <h3>{user.name}</h3>
                 <p>{user.email}</p>
                 <span className='user-role'>{user.role}</span>
+                {user.role === 'shopmanager' && user.shop && (
+                  <div className='user-shop-info'>
+                    <p>
+                      <strong>Shop:</strong> {user.shop.name}
+                    </p>
+                    <p>({user.shop.location || 'No location'})</p>
+                  </div>
+                )}
               </div>
               <div className='user-actions'>
                 <button
