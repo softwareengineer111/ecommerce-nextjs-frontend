@@ -37,7 +37,7 @@ export default function Home() {
           <ul className='product-grid'>
             {products.map((p) => (
               <li key={p._id} className='product-card'>
-                <Link href={`/${p._id}`} className='product-card-link'>
+                <Link href={`${p._id}`} className='product-card-link'>
                   {p.images && p.images.length > 0 && (
                     <img
                       src={p.images[0].url}
