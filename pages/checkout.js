@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { apiFetch } from '../utils/api';
 import AuthGuard from '../components/AuthGuard';
+import styles from './checkout.module.css';
 
 function CheckoutPage() {
   const [cart, setCart] = useState(null);
@@ -69,16 +70,21 @@ function CheckoutPage() {
 
   return (
     <div className='checkout-container'>
+    <div className={styles.container}>
       <h1>Checkout</h1>
       <div className='checkout-layout'>
         <div className='checkout-form-section'>
+      <div className={styles.layout}>
+        <div className={styles.formSection}>
           <h2>Shipping Information</h2>
           <form onSubmit={handlePlaceOrder}>
             <div className='form-group'>
+            <div className={styles.formGroup}>
               <label htmlFor='address'>Shipping Address</label>
               <textarea
                 id='address'
                 className='form-input'
+                className={styles.formInput}
                 rows='4'
                 placeholder='Enter your full shipping address'
                 value={address}
@@ -87,9 +93,11 @@ function CheckoutPage() {
               />
             </div>
             {error && <p style={{ color: 'red' }}>{error}</p>}
+            {error && <p className={styles.error}>{error}</p>}
             <button
               type='submit'
               className='form-button'
+              className={styles.placeOrderButton}
               disabled={isPlacingOrder || !cart}
             >
               {isPlacingOrder ? 'Placing Order...' : 'Place Order'}
@@ -98,22 +106,28 @@ function CheckoutPage() {
         </div>
 
         <div className='checkout-summary-section'>
+        <div className={styles.summarySection}>
           <h2>Order Summary</h2>
           {cart && (
             <>
               <ul className='checkout-items-list'>
+              <ul className={styles.itemList}>
                 {cart.items.map((item) => (
                   <li key={item.product._id} className='checkout-item'>
                     <span className='item-name'>
+                  <li key={item.product._id} className={styles.item}>
+                    <span className={styles.itemName}>
                       {item.product.name} (x{item.quantity})
                     </span>
                     <span className='item-price'>
+                    <span className={styles.itemPrice}>
                       ${(item.product.price * item.quantity).toFixed(2)}
                     </span>
                   </li>
                 ))}
               </ul>
               <div className='checkout-total'>
+              <div className={styles.total}>
                 <strong>Total:</strong>
                 <strong>${calculateTotal().toFixed(2)}</strong>
               </div>
