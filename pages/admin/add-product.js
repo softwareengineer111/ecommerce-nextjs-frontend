@@ -154,7 +154,7 @@ function AddProduct() {
 
 export default function GuardedAddProduct() {
   return (
-    <AuthGuard allowedRoles={['superadmin', 'shop manager']}>
+    <AuthGuard allowedRoles={['superadmin', 'shopmanager']}>
       <AddProduct />
     </AuthGuard>
   );
