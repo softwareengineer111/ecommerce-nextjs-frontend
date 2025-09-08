@@ -44,6 +44,12 @@ const Navbar = () => {
                   <Link href='/admin/products' className='nav-link'>
                     Manage Products
                   </Link>
+                  <Link href='/admin/users' className='nav-link'>
+                    Manage Users
+                  </Link>
+                  <Link href='/admin/orders' className='nav-link'>
+                    Manage Orders
+                  </Link>
                 </>
               )}
               <button onClick={handleLogout} className='nav-button'>

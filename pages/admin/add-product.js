@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { apiFetch } from '../../utils/api';
 import AuthGuard from '../../utils/AuthGuard';
@@ -9,11 +9,29 @@ function AddProduct() {
     description: '',
     price: '',
     stock: '',
+    category: '', // Add category to form state
   });
+  const [categories, setCategories] = useState([]);
   const [files, setFiles] = useState([]);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    // Fetch categories to populate the dropdown
+    const fetchCategories = async () => {
+      try {
+        const data = await apiFetch('/categories');
+        if (Array.isArray(data)) {
+          setCategories(data);
+        }
+      } catch (err) {
+        console.error('Failed to fetch categories:', err);
+        setError('Could not load categories. Please try again.');
+      }
+    };
+    fetchCategories();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -72,6 +90,25 @@ function AddProduct() {
             placeholder='Description'
             onChange={(e) => setForm({ ...form, description: e.target.value })}
           />
+        </div>
+        <div className='form-group'>
+          <label htmlFor='category'>Category</label>
+          <select
+            id='category'
+            className='form-input'
+            value={form.category}
+            onChange={(e) => setForm({ ...form, category: e.target.value })}
+            required
+          >
+            <option value='' disabled>
+              Select a category
+            </option>
+            {categories.map((cat) => (
+              <option key={cat._id} value={cat._id}>
+                {cat.name}
+              </option>
+            ))}
+          </select>
         </div>
         <div className='form-group'>
           <label htmlFor='price'>Price</label>

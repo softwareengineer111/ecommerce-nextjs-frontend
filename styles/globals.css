@@ -421,3 +421,199 @@ a:hover {
   display: flex;
   gap: 0.5rem;
 }
+
+/* Admin User List */
+.user-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 2rem;
+}
+
+.user-item {
+  background: #fff;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-info h3 {
+  margin: 0 0 0.25rem 0;
+  font-size: 1.1rem;
+}
+
+.user-info p {
+  margin: 0;
+  color: #666;
+}
+
+.user-role {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.8rem;
+  font-weight: bold;
+  border-radius: 1rem;
+  background-color: #e0e0e0;
+  color: #555;
+  text-transform: capitalize;
+}
+
+.user-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+/* Admin Order List */
+.order-list-admin {
+  list-style: none;
+  padding: 0;
+  margin-top: 2rem;
+}
+
+.order-item-admin {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.order-info-main {
+  flex-grow: 1;
+  line-height: 1.5;
+}
+
+.order-info-secondary {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+  text-align: right;
+}
+
+.order-total {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.order-actions-admin {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Order Status Badge */
+.order-status-badge {
+  padding: 0.3rem 0.8rem;
+  border-radius: 1rem;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #fff;
+  text-transform: capitalize;
+}
+
+.status-pending {
+  background-color: #f0ad4e;
+}
+.status-processing {
+  background-color: #0275d8;
+}
+.status-shipped {
+  background-color: #5bc0de;
+}
+.status-delivered {
+  background-color: #5cb85c;
+}
+.status-cancelled {
+  background-color: #d9534f;
+}
+
+/* Admin Order Detail Page */
+.order-detail-admin-container {
+  display: grid;
+  gap: 2rem;
+  grid-template-areas:
+    'header'
+    'summary'
+    'status'
+    'items'
+    'address';
+}
+
+@media (min-width: 768px) {
+  .order-detail-admin-container {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      'header header'
+      'summary status'
+      'items items'
+      'address address';
+  }
+}
+
+.order-detail-admin-container h1 {
+  grid-area: header;
+}
+.order-summary-box {
+  grid-area: summary;
+}
+.order-status-update-box {
+  grid-area: status;
+}
+.order-items-box {
+  grid-area: items;
+}
+.order-address-box {
+  grid-area: address;
+}
+
+.order-detail-admin-container > div {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.order-detail-admin-container h2 {
+  margin-top: 0;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.order-items-list {
+  list-style: none;
+  padding: 0;
+}
+
+.order-item-detail {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+.order-item-detail:last-child {
+  border-bottom: none;
+}
+
+.order-item-image {
+  width: 75px;
+  height: 75px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.order-item-info h3 {
+  margin: 0;
+}
