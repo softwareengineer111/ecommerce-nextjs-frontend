@@ -24,6 +24,7 @@ const Navbar = () => {
     user && ['superadmin', 'shop manager'].includes(user.role);
   const isSuperAdmin = user && user.role === 'superadmin';
   const isShopManager = user && user.role === 'shopmanager';
+  const isCustomer = user && user.role === 'user';
 
   return (
     <nav className='navbar'>
@@ -63,9 +64,11 @@ const Navbar = () => {
                   </Link>
                 </>
               )}
-              <Link href='/cart' className='nav-link'>
-                Cart
-              </Link>
+              {isCustomer && (
+                <Link href='/cart' className='nav-link'>
+                  My Cart
+                </Link>
+              )}
               <button onClick={handleLogout} className='nav-button'>
                 Logout
               </button>
