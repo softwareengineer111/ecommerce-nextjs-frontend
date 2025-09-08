@@ -12,7 +12,9 @@ function EditProduct() {
     description: '',
     price: '',
     stock: '',
+    category: '',
   });
+  const [categories, setCategories] = useState([]);
   const [currentImages, setCurrentImages] = useState([]);
   const [imagesToDelete, setImagesToDelete] = useState([]);
   const [newFiles, setNewFiles] = useState([]);
@@ -24,15 +26,18 @@ function EditProduct() {
     if (!router.isReady || !id) return;
 
     setIsLoading(true);
-    apiFetch(`/products/${id}`)
-      .then((product) => {
+    Promise.all([apiFetch(`/products/${id}`), apiFetch('/categories')])
+      .then(([product, fetchedCategories]) => {
         setForm({
           name: product.name,
           description: product.description || '',
           price: product.price,
           stock: product.stock,
+          // Handle both populated (object) and unpopulated (string) category from API
+          category: product.category?._id || product.category || '',
         });
         setCurrentImages(product.images || []);
+        setCategories(fetchedCategories || []);
       })
       .catch((err) => {
         setError(err.message);
@@ -131,6 +136,26 @@ function EditProduct() {
             value={form.description}
             onChange={handleFormChange}
           />
+        </div>
+        <div className='form-group'>
+          <label htmlFor='category'>Category</label>
+          <select
+            id='category'
+            name='category'
+            className='form-input'
+            value={form.category}
+            onChange={handleFormChange}
+            required
+          >
+            <option value='' disabled>
+              Select a category
+            </option>
+            {categories.map((cat) => (
+              <option key={cat._id} value={cat._id}>
+                {cat.name}
+              </option>
+            ))}
+          </select>
         </div>
         <div className='form-group'>
           <label htmlFor='price'>Price</label>
