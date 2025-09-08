@@ -93,7 +93,7 @@ function EditProduct() {
 
       if (res._id) {
         alert('Product updated successfully!');
-        router.push(`/products/${res._id}`); // Navigate to the updated product page
+        router.push(`/products/${res._id}/detail`); // Navigate to the updated product detail page
       } else {
         throw new Error(res.message || 'Failed to update product.');
       }
@@ -223,7 +223,7 @@ function EditProduct() {
 
 export default function GuardedEditProduct() {
   return (
-    <AuthGuard allowedRoles={['superadmin', 'shop manager']}>
+    <AuthGuard allowedRoles={['superadmin', 'shopmanager']}>
       <EditProduct />
     </AuthGuard>
   );

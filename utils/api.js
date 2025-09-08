@@ -37,6 +37,19 @@ export const getUserFromToken = () => {
   }
 };
 
+/**
+ * Custom error class for API fetch errors.
+ * This allows for more detailed error handling by including the status code.
+ */
+export class ApiError extends Error {
+  constructor(message, status, data) {
+    super(message);
+    this.name = 'ApiError';
+    this.status = status;
+    this.data = data; // The full error response body
+  }
+}
+
 export const apiFetch = async (endpoint, options = {}) => {
   const token = getToken();
   const defaultHeaders = {
@@ -62,11 +75,11 @@ export const apiFetch = async (endpoint, options = {}) => {
     if (!res.ok) {
       // Try to get a meaningful error message from the response body
       const errorData = await res.json().catch(() => ({})); // Gracefully handle non-JSON error responses
-      throw new Error(
+      const message =
         errorData.message ||
-          errorData.msg ||
-          `Request failed with status ${res.status}`
-      );
+        errorData.msg ||
+        `Request failed with status ${res.status}`;
+      throw new ApiError(message, res.status, errorData);
     }
 
     // If the response is OK, parse and return the JSON body.

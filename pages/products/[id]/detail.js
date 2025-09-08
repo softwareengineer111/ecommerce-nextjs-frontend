@@ -26,6 +26,7 @@ function ProductDetail() {
     apiFetch(`/products/${id}`)
       .then((data) => {
         setProduct(data);
+        console.log('data', data);
       })
       .catch((err) => {
         setError(err.message);
