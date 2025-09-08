@@ -53,7 +53,6 @@ function CheckoutPage() {
       router.push(`/orders/${newOrder._id}/success`);
     } catch (err) {
       setError(err.message);
-      alert(`Failed to place order: ${err.message}`);
     } finally {
       setIsPlacingOrder(false);
     }
