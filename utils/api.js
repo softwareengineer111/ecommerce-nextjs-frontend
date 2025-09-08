@@ -1,8 +1,8 @@
-export const API_URL = "http://localhost:5000/api";
+export const API_URL = 'https://ecommerce-backend-hazel-alpha.vercel.app/api';
 
 export const getToken = () => {
-  if (typeof window !== "undefined") {
-    return localStorage.getItem("token");
+  if (typeof window !== 'undefined') {
+    return localStorage.getItem('token');
   }
   return null;
 };
@@ -10,7 +10,7 @@ export const getToken = () => {
 export const apiFetch = async (endpoint, options = {}) => {
   const token = getToken();
   const headers = {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
     ...(token && { Authorization: `Bearer ${token}` }),
     ...options.headers,
   };
