@@ -16,7 +16,14 @@ export const getUserFromToken = () => {
     // Decode the token payload. The payload is the middle part of the token.
     // It's Base64-encoded JSON.
     const payload = JSON.parse(atob(token.split('.')[1]));
-    return payload; // This should contain user info like id and role
+    console.log('payload:', payload); // e.g., { user: { id, role, name }, iat, exp }
+
+    // If the payload has a nested 'user' object, return that.
+    // This makes the rest of the app simpler, allowing `user.role`, `user.id`, etc.
+    if (payload.user) {
+      return payload.user;
+    }
+    return payload; // Fallback for tokens with flat structure
   } catch (e) {
     console.error('Invalid token:', e);
     return null;

@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import AuthGuard from '../../components/AuthGuard';
-import { getUserFromToken } from '../../utils/api';
+import AuthGuard from '../utils/AuthGuard';
+import { getUserFromToken } from '../utils/api';
 
 function AdminDashboard() {
   const user = getUserFromToken();
@@ -36,7 +36,7 @@ function AdminDashboard() {
  */
 export default function GuardedAdminDashboard() {
   return (
-    <AuthGuard allowedRoles={['super admin']}>
+    <AuthGuard allowedRoles={['superadmin']}>
       <AdminDashboard />
     </AuthGuard>
   );

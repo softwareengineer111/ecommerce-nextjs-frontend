@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { apiFetch } from '../utils/api';
-import AuthGuard from '../components/AuthGuard';
+import AuthGuard from '../utils/AuthGuard';
 
 function AddProduct() {
   const [form, setForm] = useState({
@@ -85,7 +85,7 @@ function AddProduct() {
 
 export default function GuardedAddProduct() {
   return (
-    <AuthGuard allowedRoles={['super admin', 'manager']}>
+    <AuthGuard allowedRoles={['superadmin', 'shop manager']}>
       <AddProduct />
     </AuthGuard>
   );

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { API_URL } from '../utils/api';
+import { API_URL, getUserFromToken } from '../utils/api';
 import GuestGuard from '../components/GuestGuard';
 
 function Login() {
@@ -27,10 +27,22 @@ function Login() {
         );
       }
 
-      // Токеныг хадгалах
+      // Save the token
       localStorage.setItem('token', data.token);
-      // Нүүр хуудас руу шилжих (бүх компонентыг шинэчлэхийн тулд хуудсыг дахин ачаална)
-      window.location.href = '/';
+
+      // Get user data from the new token to check the role
+      const user = getUserFromToken();
+
+      // You can check the user object in the browser console
+      console.log('Logged in user data:', user);
+
+      if (user && user.role === 'superadmin') {
+        // If superadmin, redirect to dashboard
+        window.location.href = '/dashboard';
+      } else {
+        // For other roles, or if user data is not available, redirect to home
+        window.location.href = '/';
+      }
     } catch (err) {
       setError(err.message);
     } finally {
